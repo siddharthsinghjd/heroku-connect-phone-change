@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phone Changer</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <style>
+        body {
+            padding-top: 60px;
+        }
+    </style>
+    <script>
+        $(function() {
+            $("#phoneChangerForm").submit(function(event) {
+                console.log('111............11111111.........11111');
+
+                var name1 = $("#name").val();
+                var accountnumber = $("#accountnumber").val();
+                var billingcity = $("#billingcity").val();
+
+                var URL = "http://localhost:5000/accounts/"+name1+"/"+accountnumber;
+                console.log(URL);
+                window.open(URL, '_blank');
+            });
+        });
+
+    </script>
+</head>
+<body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Salesforce Trial Application</a>
+                  </div>
+                  <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a href="/">Home</a></li>
+                      <li class="active"><a href="accounts">Accounts</a></li>
+                      <li class="active"><a href="contacts">Contacts</a></li>
+                      <li class="active"><a href="reports">Reports</a></li>
+                      <!--=<li class="active"><a href="#"></a></li>-->
+                    </ul>
+                  </div><!--/.nav-collapse -->
+                </div>
+              </nav>
+
+    <div class="container">
+        <form id="phoneChangerForm" style="width: 400px">
+            <div class="">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Find your Report</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="name">From</label>
+                        <input type="date" class="form-control" id="name" placeholder="Enter the value" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountnumber">To</label>
+                        <input type="date" class="form-control" id="accountnumber" placeholder="Enter the value" required>
+                    </div>
+                </div>
+                <div class="">
+                    <div id="message" class="alert alert-info" role="alert" style="display: none;">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        <span id="messageMessage"></span>
+                    </div>
+                    <div id="error" class="alert alert-danger" role="alert" style="display: none;">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        <span id="errorMessage"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
