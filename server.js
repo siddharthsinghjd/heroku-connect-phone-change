@@ -68,6 +68,20 @@ app.get("/createAccount",function defaultRoute(req, res){
     res.render("index4.ejs", {sid:name});
 });
 
+app.get("/reports",function defaultRoute(req, res){
+    var name = 'hello';
+    res.render("index5.ejs", {sid:name});
+});
+
+app.get("/accounts/:name/:accountnumber",function defaultRoute(req, res){
+    var query = "SELECT * FROM salesforce.account where salesforce.account.createddate > '"+ req.params.name + "' and salesforce.account.createddate < '"+ req.params.accountnumber + "'";
+    var result = [];
+    sharedPgClient.query(query, function(err, result){
+        console.log("Jobs Query Result Count: " + result.rows.length);
+        res.render("index6.ejs", {connectResults: result.rows});
+    });
+});
+
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
