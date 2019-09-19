@@ -73,6 +73,19 @@ app.get("/reports",function defaultRoute(req, res){
     res.render("index5.ejs", {sid:name});
 });
 
+app.get("/charts",function defaultRoute(req, res){
+    res.render("charts.ejs");
+});
+
+app.get("/opportunity",function defaultRoute(req, res){
+    var query = "SELECT * FROM salesforce.Opportunity";
+    var result = [];
+    sharedPgClient.query(query, function(err, result){
+        console.log("Jobs Query Result Count: " + result.rows.length);
+        res.send({connectResults: result.rows});
+    });
+});
+
 app.get("/accounts/:name/:accountnumber",function defaultRoute(req, res){
     var query = "SELECT * FROM salesforce.account where salesforce.account.createddate > '"+ req.params.name + "' and salesforce.account.createddate < '"+ req.params.accountnumber + "'";
     var result = [];
