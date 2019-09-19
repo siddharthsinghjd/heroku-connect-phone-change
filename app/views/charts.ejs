@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+
+window.onload = function() {
+
+console.log(window.location.href);
+
+var dataPoints = [];
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title: {
+		text: "Closed Opportunity Data"
+	},
+	axisY: {
+		title: "Amount ($)",
+		titleFontSize: 24
+    },
+    axisX: {
+		title: "Closed Date",
+		titleFontSize: 24
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,### $",
+		dataPoints: dataPoints
+	}]
+});
+
+function addData(data) {
+    console.log('***********************');
+    console.log(data);
+    
+	for (var i = 0; i < data.connectResults.length; i++) {
+		dataPoints.push({
+			x: new Date(data.connectResults[i].closedate),
+			y: data.connectResults[i].amount
+		});
+	}
+	chart.render();
+
+}
+
+$.getJSON("https://mobile-charging.herokuapp.com/opportunity", addData);
+//$.getJSON(window.location.href, addData);
+
+}
+</script>
+</head>
+<body>
+<br/>
+<br/>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
