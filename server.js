@@ -77,6 +77,24 @@ app.get("/charts",function defaultRoute(req, res){
     res.render("charts.ejs");
 });
 
+app.get("/chart",function defaultRoute(req, res){
+    res.render("index7.ejs");
+});
+
+app.get("/custom/:name/:accountnumber",function defaultRoute(req, res){
+    res.render("chart.ejs");
+});
+
+app.get("/customchart/:name/:accountnumber",function defaultRoute(req, res){
+    var query = "SELECT * FROM salesforce.Opportunity where salesforce.Opportunity.closedate > '"+ req.params.name + "' and salesforce.Opportunity.closedate < '"+ req.params.accountnumber + "'";
+    console.log(query);
+    var result = [];
+    sharedPgClient.query(query, function(err, result){
+        console.log("Jobs Query Result Count: " + result.rows.length);
+        res.send({connectResults: result.rows});
+    });
+});
+
 app.get("/opportunity",function defaultRoute(req, res){
     var query = "SELECT * FROM salesforce.Opportunity";
     var result = [];
