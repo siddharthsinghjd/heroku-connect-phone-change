@@ -20,8 +20,8 @@
             var name1 = $("#name").val();
             var accountnumber = $("#accountnumber").val();
             var billingcity = $("#billingcity").val();
-
-            var URL = "http://localhost:5000/custom/"+name1+"/"+accountnumber;
+            
+            var URL = "https://mobile-charging.herokuapp.com/custom/"+name1+"/"+accountnumber;
             console.log(URL);
             window.open(URL);
         });
