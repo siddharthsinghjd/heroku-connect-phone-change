@@ -57,7 +57,7 @@ chart.render();
 
 var strurl = window.location.href;
 var res = strurl.split('/').slice(2);
-res[1] = 'custom';
+res[1] = 'customchart';
 var str2 = "https://mobile-charging.herokuapp.com/"+res[1]+"/"+res[2]+"/"+res[3];
 
 $.getJSON(str2, addData);
