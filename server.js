@@ -169,7 +169,7 @@ app.post('/postlead', function(req, res) {
 
     console.log(req.body);
     sharedPgClient.query('INSERT INTO salesforce.Lead (Phone, sid16__Product__c, Company, FirstName, LastName, Email) VALUES ($1, $2, $3, $4, $5, $6)',
-    [req.body.phone.trim(), req.body.sid16__product__c.trim(), req.body.company.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
+    [req.body.phone.trim(), req.body.product.trim(), req.body.company.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
     function(err, result) {
      // done();
       if (err) {
