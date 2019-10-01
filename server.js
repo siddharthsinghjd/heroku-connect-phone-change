@@ -58,6 +58,16 @@ app.get("/contacts",function defaultRoute(req, res){
     });
 });
 
+app.get("/leads",function defaultRoute(req, res){
+    var query = "SELECT * FROM salesforce.Lead";
+    var result = [];
+    sharedPgClient.query(query, function(err, result){
+        console.log(result.rows);
+        console.log("Jobs Query Result Count: " + result.rows.length);
+        res.render("index9.ejs", {connectResults: result.rows});
+    });
+});
+
 app.get("/createContact",function defaultRoute(req, res){
     var name = 'hello';
     res.render("index3.ejs", {sid:name});
@@ -137,6 +147,24 @@ app.post('/update1', function(req, res) {
  app.post('/update2', function(req, res) {
     sharedPgClient.query('INSERT INTO salesforce.Account (Name, AccountNumber, BillingCity) VALUES ($1, $2, $3)',
     [req.body.name.trim(), req.body.accountnumber.trim(), req.body.billingcity.trim()],
+    function(err, result) {
+     // done();
+      if (err) {
+          res.status(400).json({error: err.message});
+      }
+      else {
+          // this will still cause jquery to display 'Record updated!'
+          // eventhough it was inserted
+          res.json(result);
+      }
+    });
+ });
+
+app.post('/postlead', function(req, res) {
+
+    console.log(req.body);
+    sharedPgClient.query('INSERT INTO salesforce.Lead (Phone, sid16__Product__c, Company, FirstName, LastName, Email) VALUES ($1, $2, $3, $4, $5, $6)',
+    [req.body.phone.trim(), req.body.sid16__product__c.trim(), req.body.company.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
     function(err, result) {
      // done();
       if (err) {
