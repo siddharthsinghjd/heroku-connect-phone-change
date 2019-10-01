@@ -73,6 +73,11 @@ app.get("/createContact",function defaultRoute(req, res){
     res.render("index3.ejs", {sid:name});
 });
 
+app.get("/createlead",function defaultRoute(req, res){
+    var name = 'hello';
+    res.render("index8.ejs", {sid:name});
+});
+
 app.get("/createAccount",function defaultRoute(req, res){
     var name = 'hello';
     res.render("index4.ejs", {sid:name});
