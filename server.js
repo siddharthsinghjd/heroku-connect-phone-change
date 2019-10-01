@@ -68,6 +68,16 @@ app.get("/leads",function defaultRoute(req, res){
     });
 });
 
+app.get("/lead",function defaultRoute(req, res){
+    var query = "SELECT * FROM salesforce.Lead";
+    var result = [];
+    sharedPgClient.query(query, function(err, result){
+        console.log(result.rows);
+        console.log("Jobs Query Result Count: " + result.rows.length);
+        res.send({connectResults: result.rows});
+    });
+});
+
 app.get("/createContact",function defaultRoute(req, res){
     var name = 'hello';
     res.render("index3.ejs", {sid:name});
